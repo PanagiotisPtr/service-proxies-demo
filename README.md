@@ -8,4 +8,4 @@ The layout is pretty straightforward. It's layered architecture with model/repo/
 
 
 ### Reference
-- Check out this great project that I'm using here: https://github.com/eiiches/go-gen-proxy
+- Check out my other project that I'm using here: https://github.com/PanagiotisPtr/proxygen

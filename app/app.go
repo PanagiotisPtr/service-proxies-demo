@@ -1,12 +1,12 @@
 package app
 
-import "github.com/panagiotisptr/service-proxies-demo/service"
+import "github.com/panagiotisptr/service-proxies-demo/service/iservice"
 
 type App struct {
-	TaskSvc service.TaskService
+	TaskSvc iservice.TaskService
 }
 
-func ProvideApp(taskSvc service.TaskService) *App {
+func ProvideApp(taskSvc iservice.TaskService) *App {
 	return &App{
 		TaskSvc: taskSvc,
 	}

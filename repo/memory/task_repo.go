@@ -3,7 +3,7 @@ package memory
 import (
 	"context"
 
-	"github.com/eiiches/go-gen-proxy/pkg/interceptor"
+	"github.com/panagiotisptr/proxygen/interceptor"
 	"github.com/panagiotisptr/service-proxies-demo/interceptors"
 	"github.com/panagiotisptr/service-proxies-demo/models"
 	"github.com/panagiotisptr/service-proxies-demo/repo"
@@ -22,15 +22,12 @@ func ProvideMemoryTaskRepository(logger *zap.Logger) repo.TaskRepository {
 		zap.String("storage", "memory"),
 	)
 	return &proxy.TaskRepository{
-		Handler: &interceptor.InterceptingInvocationHandler{
-			Delegate: &MemoryTaskRepository{
-				tasks:  []*models.Task{},
-				logger: l,
-			},
-			Interceptor: &interceptors.TracingInterceptor{
-				StructName: "MemoryTaskRepository",
-				Logger:     l,
-			},
+		Implementation: &MemoryTaskRepository{
+			tasks:  []*models.Task{},
+			logger: l,
+		},
+		Interceptors: interceptor.InterceptorChain{
+			interceptors.TracingInterceptor(l, "TaskRepository"),
 		},
 	}
 }

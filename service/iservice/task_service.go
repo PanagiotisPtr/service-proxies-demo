@@ -1,5 +1,4 @@
-//go:generate proxygen --interface github.com/panagiotisptr/service-proxies-demo/repo.TaskRepository --package proxy --name TaskRepository --output proxy/task_repo.go
-package repo
+package iservice
 
 import (
 	"context"
@@ -7,7 +6,7 @@ import (
 	"github.com/panagiotisptr/service-proxies-demo/models"
 )
 
-type TaskRepository interface {
+type TaskService interface {
 	List(ctx context.Context) ([]*models.Task, error)
 	Get(ctx context.Context, id int64) (*models.Task, error)
 	Create(ctx context.Context, task *models.Task) error
